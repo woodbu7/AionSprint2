@@ -194,8 +194,17 @@ namespace TheAionProject
         {
             string messageBoxText =
                 $"Current Location: {spaceTimeLocation.CommonName}\n" +
-                " \n" +
-                spaceTimeLocation.GeneralContents;
+                " \n";
+
+            string contents = null;
+            foreach (string item in spaceTimeLocation.GeneralContents)
+            {
+                contents +=
+                    item +
+                    Environment.NewLine;
+            }
+
+            messageBoxText += contents;
 
             return messageBoxText;
         }
@@ -239,8 +248,10 @@ namespace TheAionProject
         {
             string messageBoxText =
                 $"Current Location: {spaceTimeLocation.CommonName}\n" +
+                $"{spaceTimeLocation.Description}" +
                 " \n" +
-                spaceTimeLocation.Description;
+                $"Radiation Level: {spaceTimeLocation.Radiation} \n";
+
 
             return messageBoxText;
         }

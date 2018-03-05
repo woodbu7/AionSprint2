@@ -134,6 +134,7 @@ namespace TheAionProject
                         _gameTraveler.SpaceTimeLocationID = _gameConsoleView.DisplayGetNextSpaceTimeLocation();
                         _currentLocation = _gameUniverse.GetSpaceTimeLocationById(_gameTraveler.SpaceTimeLocationID);
 
+                        UpdateHealth();
                         //
                         // set the game play screen to the current location info format
                         //
@@ -183,12 +184,25 @@ namespace TheAionProject
                 _gameTraveler.SpaceTimeLocationsVisited.Add(_currentLocation.SpaceTimeLocationID);
 
                 //
-                // update experience points for visiting locations
+                // update experience points and health for visiting locations
                 //
-                _gameTraveler.ExperiencePoints += _currentLocation.ExperiencePoints;
+                _gameTraveler.ExperiencePoints += _currentLocation.ExperiencePoints; 
+            }
+
+        }
+
+        private void UpdateHealth()
+        {
+            //
+            // update travelers health based on location contents
+            //
+            _gameTraveler.Health -= _currentLocation.Radiation;
+            if (_gameTraveler.Health <= 1)
+            {
+                _gameTraveler.Lives -= 1;
             }
         }
 
-        #endregion
+    #endregion
     }
 }

@@ -12,8 +12,14 @@ namespace TheAionProject
     /// </summary>
     public class Universe
     {
+        // dictinary to hold health value of content
+
+        private Dictionary<string, int> _contentValues;
+
+
         #region ***** define all lists to be maintained by the Universe object *****
         private List<SpaceTimeLocation> _spaceTimeLocations;
+        private List<Region> _regionLocations;
 
         #endregion
 
@@ -23,6 +29,18 @@ namespace TheAionProject
         {
             get { return _spaceTimeLocations; }
             set { _spaceTimeLocations = value; }
+        }
+
+        public List<Region> RegionLocations
+        {
+            get { return _regionLocations; }
+            set { _regionLocations = value; }
+        }
+
+        public Dictionary<string, int> ContentValues
+        {
+            get { return _contentValues; }
+            set { _contentValues = value; }
         }
 
         #endregion
@@ -50,6 +68,14 @@ namespace TheAionProject
         private void IntializeUniverse()
         {
             _spaceTimeLocations = UniverseObjects.SpaceTimeLocations;
+            //_regionLocations = UniverseObjects.RegionLocations;
+
+            _contentValues = new Dictionary<string, int>()
+            {
+                { "Fish Taco", 10 },
+                { "Pizza", 5 },
+                { "Rotten Apple", -10 }
+            };
         }
 
         #endregion
