@@ -190,18 +190,21 @@ namespace TheAionProject
             return messageBoxText;
         }
 
-        public static string LookAround(SpaceTimeLocation spaceTimeLocation)
+        public static string LookAround(SpaceTimeLocation spaceTimeLocation, Dictionary<string, int> contentValues)
         {
             string messageBoxText =
                 $"Current Location: {spaceTimeLocation.CommonName}\n" +
                 " \n";
 
             string contents = null;
-            foreach (string item in spaceTimeLocation.GeneralContents)
+
+            foreach (var content in contentValues)
             {
-                contents +=
-                    item +
-                    Environment.NewLine;
+                if (spaceTimeLocation.GeneralContents.Contains(content.Key))
+                {
+                    contents +=
+                        $"{content.Key}, health points = {content.Value}\n";
+                }
             }
 
             messageBoxText += contents;
@@ -220,8 +223,8 @@ namespace TheAionProject
                 //
                 // display table header
                 //
-                "ID".PadRight(10) + "Name".PadRight(30) + "\n" +
-                "---".PadRight(10) + "----------------------".PadRight(30) + "\n";
+                "ID".PadRight(5) + "Name".PadRight(30) + "Entry Points".PadRight(30) + "\n" +
+                "___".PadRight(5) + "__________________________".PadRight(30) + "________________________" + "\n";
 
             //
             // display all locations except the current location
@@ -232,9 +235,10 @@ namespace TheAionProject
                 if (spaceTimeLocation.SpaceTimeLocationID != gameTraveler.SpaceTimeLocationID)
                 {
                     spaceTimeLocationList +=
-                        $"{spaceTimeLocation.SpaceTimeLocationID}".PadRight(10) +
+                        $"{spaceTimeLocation.SpaceTimeLocationID}".PadRight(5) +
                         $"{spaceTimeLocation.CommonName}".PadRight(30) +
-                        $"{spaceTimeLocation.Accessable}".PadRight(10) +
+                        $"{spaceTimeLocation.EntryPoints}".PadRight(30) +
+
                         Environment.NewLine;
                 }
             }
@@ -247,6 +251,7 @@ namespace TheAionProject
         public static string CurrentLocationInfo(SpaceTimeLocation spaceTimeLocation)
         {
             string messageBoxText =
+                $"You are currently in the regiona: {spaceTimeLocation.Region}\n" +
                 $"Current Location: {spaceTimeLocation.CommonName}\n" +
                 $"{spaceTimeLocation.Description}" +
                 " \n" +
@@ -283,6 +288,17 @@ namespace TheAionProject
             messageBoxText += spaceTimeLocationList;
 
             return messageBoxText;
+        }
+
+        public static string GelandriaSpaceTimeLoopHole(Traveler gameTraveler)
+        {
+            string messageBoxText =
+                $"{gameTraveler.Name}, Gelandria is a Space Time Loop Hole! \n" +
+                "You will be sent to another space time location. \n" +
+                " \n" +
+                "Press any key to continye.";
+
+            return messageBoxText;        
         }
     }
 }

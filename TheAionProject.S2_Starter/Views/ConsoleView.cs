@@ -163,6 +163,17 @@ namespace TheAionProject
             return true;
         }
 
+        public int GetRandomNumber()
+        {
+            int randomId = 0;
+            int maxId = _gameUniverse.GetMaxSpaceTimeLocationId();
+
+            Random number = new Random();
+            randomId = number.Next(1, maxId); 
+
+            return randomId;
+        }
+
         /// <summary>
         /// get a character race value from the user
         /// </summary>
@@ -502,7 +513,7 @@ namespace TheAionProject
         public void DisplayLookAround()
         {
             SpaceTimeLocation currentSpaceTimeLocation = _gameUniverse.GetSpaceTimeLocationById(_gameTraveler.SpaceTimeLocationID);
-            DisplayGamePlayScreen("Current Location", Text.LookAround(currentSpaceTimeLocation), ActionMenu.MainMenu, "");
+            DisplayGamePlayScreen("Current Location", Text.LookAround(currentSpaceTimeLocation, _gameUniverse.ContentValues), ActionMenu.MainMenu, "");
         }
 
         /// <summary>
@@ -528,7 +539,7 @@ namespace TheAionProject
                 //
                 if (_gameUniverse.IsValidSpaceTimeLocationId(spaceTimeLocationId))
                 {
-                    if (_gameUniverse.IsAccessibleLocation(spaceTimeLocationId))
+                    if (_gameUniverse.IsAccessibleLocation(spaceTimeLocationId, _gameTraveler))
                     {
                         validSpaceTimeLocationId = true;
                     }
@@ -545,6 +556,18 @@ namespace TheAionProject
             }
 
             return spaceTimeLocationId;
+        }
+
+        public int DisplayGelandria()
+        {
+            int newId = GetRandomNumber();
+            DisplayGamePlayScreen("Space Time Loop Hole", Text.GelandriaSpaceTimeLoopHole(_gameTraveler), ActionMenu.MissionIntro, "");
+
+            Console.CursorVisible = false;
+            Console.ReadKey();
+
+            return newId;
+
         }
 
         public void DisplayLocationsVisited()

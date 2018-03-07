@@ -11,6 +11,19 @@ namespace TheAionProject
     /// </summary>
     public class SpaceTimeLocation
     {
+        #region Enums
+
+        public enum RegionName
+        {
+            Earth,
+            Calypso,
+            Lappona,
+            All
+        }
+
+        #endregion
+
+
         #region FIELDS
 
         private string _commonName;
@@ -20,6 +33,9 @@ namespace TheAionProject
         private bool _accessable;
         private int _experiencePoints;
         private int _radiation;
+        private RegionName _region;
+        private int _entryPoints;
+        private List<RegionName> _accessableRegions;   
 
         #endregion
 
@@ -68,12 +84,28 @@ namespace TheAionProject
             set { _radiation = value; }
         }
 
+        public RegionName Region
+        {
+            get { return _region; }
+            set { _region = value; }
+        }
+
+        public int EntryPoints
+        {
+            get { return _entryPoints; }
+            set { _entryPoints = value; }
+        }
+
+        public List<RegionName> AccessabelRegions
+        {
+            get { return _accessableRegions; }
+            set { _accessableRegions = value; }
+        }
 
         #endregion
 
 
         #region CONSTRUCTORS
-
 
 
         #endregion

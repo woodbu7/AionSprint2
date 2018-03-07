@@ -134,6 +134,12 @@ namespace TheAionProject
                         _gameTraveler.SpaceTimeLocationID = _gameConsoleView.DisplayGetNextSpaceTimeLocation();
                         _currentLocation = _gameUniverse.GetSpaceTimeLocationById(_gameTraveler.SpaceTimeLocationID);
 
+                        if (_currentLocation.CommonName == "Gelandria")
+                        { 
+                            _gameTraveler.SpaceTimeLocationID = _gameConsoleView.DisplayGelandria();
+                            _currentLocation = _gameUniverse.GetSpaceTimeLocationById(_gameTraveler.SpaceTimeLocationID);
+                        }
+
                         UpdateHealth();
                         //
                         // set the game play screen to the current location info format
@@ -197,6 +203,15 @@ namespace TheAionProject
             // update travelers health based on location contents
             //
             _gameTraveler.Health -= _currentLocation.Radiation;
+
+            foreach (var item in _gameUniverse.ContentValues)
+            {
+                if (_currentLocation.GeneralContents.Contains(item.Key))
+                {
+                    _gameTraveler.Health += item.Value;
+                }
+            }
+
             if (_gameTraveler.Health <= 1)
             {
                 _gameTraveler.Lives -= 1;

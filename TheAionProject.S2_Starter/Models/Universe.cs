@@ -19,7 +19,6 @@ namespace TheAionProject
 
         #region ***** define all lists to be maintained by the Universe object *****
         private List<SpaceTimeLocation> _spaceTimeLocations;
-        private List<Region> _regionLocations;
 
         #endregion
 
@@ -31,11 +30,6 @@ namespace TheAionProject
             set { _spaceTimeLocations = value; }
         }
 
-        public List<Region> RegionLocations
-        {
-            get { return _regionLocations; }
-            set { _regionLocations = value; }
-        }
 
         public Dictionary<string, int> ContentValues
         {
@@ -68,13 +62,13 @@ namespace TheAionProject
         private void IntializeUniverse()
         {
             _spaceTimeLocations = UniverseObjects.SpaceTimeLocations;
-            //_regionLocations = UniverseObjects.RegionLocations;
 
             _contentValues = new Dictionary<string, int>()
             {
                 { "Fish Taco", 10 },
                 { "Pizza", 5 },
-                { "Rotten Apple", -10 }
+                { "Rotten Apple", -10 },
+                { "Super Potato", 50 }
             };
         }
 
@@ -119,17 +113,25 @@ namespace TheAionProject
         /// </summary>
         /// <param name="spaceTimeLocationId"></param>
         /// <returns>accessible</returns>
-        public bool IsAccessibleLocation(int spaceTimeLocationId)
+        public bool IsAccessibleLocation(int spaceTimeLocationId, Traveler gameTraveler)
         {
+
             SpaceTimeLocation spaceTimeLocation = GetSpaceTimeLocationById(spaceTimeLocationId);
-            if (spaceTimeLocation.Accessable == true)
+            if (gameTraveler.ExperiencePoints >= spaceTimeLocation.EntryPoints)
             {
                 return true;
             }
             else
             {
                 return false;
-            }    
+            }   
+            
+        }
+
+        public bool AccessibleRegion(SpaceTimeLocation.RegionName region, Traveler gameTraveler)
+        {
+            SpaceTimeLocation currentLocation = new SpaceTimeLocation();
+            currentLocation.SpaceTimeLocationID = gameTraveler.SpaceTimeLocationID;
         }
 
         /// <summary>

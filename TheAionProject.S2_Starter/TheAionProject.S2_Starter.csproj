@@ -54,7 +54,6 @@
     <Compile Include="Models\Character.cs" />
     <Compile Include="Models\Content.cs" />
     <Compile Include="Models\Menu.cs" />
-    <Compile Include="Models\Region.cs" />
     <Compile Include="Models\SpaceTimeLocation.cs" />
     <Compile Include="Models\Traveler.cs" />
     <Compile Include="Models\TravelerAction.cs" />
