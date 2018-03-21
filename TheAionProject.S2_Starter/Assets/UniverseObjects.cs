@@ -147,7 +147,9 @@ namespace TheAionProject
                     EntryPoints = 0,
                     AccessabelRegions = new List<SpaceTimeLocation.RegionName>()
                     {
-                        SpaceTimeLocation.RegionName.All
+                        SpaceTimeLocation.RegionName.Earth,
+                        SpaceTimeLocation.RegionName.Lappona,
+                        SpaceTimeLocation.RegionName.Calypso
                     }
                 }
 

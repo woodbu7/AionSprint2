@@ -117,21 +117,26 @@ namespace TheAionProject
         {
 
             SpaceTimeLocation spaceTimeLocation = GetSpaceTimeLocationById(spaceTimeLocationId);
-            if (gameTraveler.ExperiencePoints >= spaceTimeLocation.EntryPoints)
+            SpaceTimeLocation currentLocation = GetSpaceTimeLocationById(gameTraveler.SpaceTimeLocationID);
+            if (spaceTimeLocation.AccessabelRegions.Contains(currentLocation.Region))
             {
-                return true;
+                if (gameTraveler.ExperiencePoints >= spaceTimeLocation.EntryPoints)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else
             {
                 return false;
-            }   
-            
-        }
+            }
 
-        public bool AccessibleRegion(SpaceTimeLocation.RegionName region, Traveler gameTraveler)
-        {
-            SpaceTimeLocation currentLocation = new SpaceTimeLocation();
-            currentLocation.SpaceTimeLocationID = gameTraveler.SpaceTimeLocationID;
+
+
+
         }
 
         /// <summary>
@@ -186,6 +191,8 @@ namespace TheAionProject
 
             return spaceTimeLocation;
         }
+
+
 
         #endregion
     }

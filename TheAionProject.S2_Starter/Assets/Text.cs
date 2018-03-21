@@ -170,8 +170,8 @@ namespace TheAionProject
                 //
                 // display table header
                 //
-                "ID".PadRight(10) + "Name".PadRight(30) + "\n" +
-                "---".PadRight(10) + "----------------------".PadRight(30) + "\n";
+                "ID".PadRight(10) + "Name".PadRight(30) + "Region".PadRight(10) + "\n" +
+                "---".PadRight(10) + "----------------------".PadRight(30) + "------------" + "\n";
 
             //
             // display all locations
@@ -182,6 +182,7 @@ namespace TheAionProject
                 spaceTimeLocationList +=
                     $"{spaceTimeLocation.SpaceTimeLocationID}".PadRight(10) +
                     $"{spaceTimeLocation.CommonName}".PadRight(30) +
+                    $"{spaceTimeLocation.Region}".PadRight(10) +
                     Environment.NewLine;
             }
 
@@ -223,8 +224,8 @@ namespace TheAionProject
                 //
                 // display table header
                 //
-                "ID".PadRight(5) + "Name".PadRight(30) + "Entry Points".PadRight(30) + "\n" +
-                "___".PadRight(5) + "__________________________".PadRight(30) + "________________________" + "\n";
+                "ID".PadRight(5) + "Name".PadRight(30) + "Region".PadRight(15) + "Entry Points".PadRight(10) + "\n" +
+                "---".PadRight(5) + "-------------------".PadRight(30) + "--------------".PadRight(15) + "-----".PadRight(10) + "\n";
 
             //
             // display all locations except the current location
@@ -237,7 +238,8 @@ namespace TheAionProject
                     spaceTimeLocationList +=
                         $"{spaceTimeLocation.SpaceTimeLocationID}".PadRight(5) +
                         $"{spaceTimeLocation.CommonName}".PadRight(30) +
-                        $"{spaceTimeLocation.EntryPoints}".PadRight(30) +
+                        $"{spaceTimeLocation.Region}".PadRight(15) +
+                        $"{spaceTimeLocation.EntryPoints}".PadRight(10) +
 
                         Environment.NewLine;
                 }
@@ -251,11 +253,26 @@ namespace TheAionProject
         public static string CurrentLocationInfo(SpaceTimeLocation spaceTimeLocation)
         {
             string messageBoxText =
-                $"You are currently in the regiona: {spaceTimeLocation.Region}\n" +
+                $"You are currently in the region: {spaceTimeLocation.Region}\n" +
                 $"Current Location: {spaceTimeLocation.CommonName}\n" +
+                $"Accesible Regions: \n";
+
+            string regionsList = null;
+            foreach (SpaceTimeLocation.RegionName region in spaceTimeLocation.AccessabelRegions)
+            {
+                regionsList += $"\t{region}".PadRight(10) + "\n";
+            }
+
+            messageBoxText += regionsList;
+
+            messageBoxText +=
+                Environment.NewLine +
+                $"Radiation Level: {spaceTimeLocation.Radiation} \n" +
+                Environment.NewLine +
                 $"{spaceTimeLocation.Description}" +
-                " \n" +
-                $"Radiation Level: {spaceTimeLocation.Radiation} \n";
+                Environment.NewLine +
+                Environment.NewLine +
+                "\tChoose from the menu options to continue.";
 
 
             return messageBoxText;
